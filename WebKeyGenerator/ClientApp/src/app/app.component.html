@@ -1,0 +1,165 @@
+
+<mat-sidenav-container class="sidenav-container" style="height: 100vh">
+
+  <mat-sidenav *ngIf="Role=='admin'" #drawer class="sidenav" fixedInViewport mode="side" [opened]="false" [autoFocus]="false" style="width:17rem;height:100vh">
+    <mat-list role="list">
+     
+
+      <mat-list-item role="listitem">
+        <button mat-button style="width:100%;text-align:start" (click)="route('/admin/reviews')">
+          <span class="material-icons">
+            star
+          </span>
+          <span style="align-self:end">
+            Отзывы
+          </span>
+        </button>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+
+
+      <mat-list-item role="listitem">
+        <button mat-button style="width:100%;text-align:start" (click)="route('/admin/users')">
+          <span class="material-icons">
+            group
+          </span>
+          <span style="align-self:end">
+            Пользователи
+          </span>
+        </button>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+
+      <mat-list-item role="listitem">
+        <button mat-button style="width:100%;text-align:start" (click)="route('/admin/reqs')">
+          <span class="material-icons">
+            list
+          </span>
+          <span style="align-self:end">
+            Заявки
+          </span>
+        </button>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+
+
+
+
+      <mat-list-item role="listitem">
+        <button mat-button style="width:100%;text-align:start" (click)="route('/admin/settings')">
+          <span class="material-icons">
+            settings
+          </span>
+          <span style="align-self:end">
+            Настройки
+          </span>
+        </button>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+
+
+      <mat-list-item role="listitem">
+        <button mat-button style="width:100%;text-align:start" (click)="logout()">
+          <span class="material-icons">
+            logout
+          </span>
+          <span style="align-self:end">
+            Выйти
+          </span>
+        </button>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </mat-list>
+  </mat-sidenav>
+
+
+
+  <mat-sidenav *ngIf="Role=='user'" #drawer class="sidenav" fixedInViewport mode="side" [opened]="false" [autoFocus]="false" style="width:17rem;height:100vh">
+    <mat-list role="list">
+      <mat-list-item role="listitem">
+        <button mat-button style="width:100%;text-align:start" (click)="route('/user/key')">
+          <span class="material-icons">
+            key
+          </span>
+          <span style="align-self:end">
+            Регистрация ключа
+          </span>
+        </button>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+
+      <mat-list-item role="listitem">
+        <button mat-button style="width:100%;text-align:start" (click)="route('/user/clients')">
+          <span class="material-icons">
+            group
+          </span>
+          <span style="align-self:end">
+            Клиенты
+          </span>
+        </button>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+
+      <mat-list-item role="listitem">
+        <button mat-button style="width:100%;text-align:start" (click)="route('/user/keys')">
+          <span class="material-icons">
+            list
+          </span>
+          <span style="align-self:end">
+            Список ключей
+          </span>
+        </button>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+
+
+      <mat-list-item role="listitem">
+        <button mat-button style="width:100%;text-align:start" (click)="logout()">
+          <span class="material-icons">
+            logout
+          </span>
+          <span style="align-self:end">
+            Выйти
+          </span>
+        </button>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </mat-list>
+  </mat-sidenav>
+
+
+
+
+
+  <mat-toolbar color="primary">
+    <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <a routerLink="/">Сервис срочной ветеринарной помощи</a>
+    <button *ngIf="User!=null" mat-button style="margin-left:auto">
+      <span>
+        <span>{{User}}</span>
+      </span>
+    </button>
+
+    <div *ngIf="User==null" style="margin-left:auto">
+
+    <button (click)="openLogin()"  mat-button style="margin-left:auto">
+      <span>
+        <span>Войти</span>
+      </span>
+    </button>
+
+    <button (click)="openRegister()" *ngIf="User==null" mat-button style="margin-left:auto">
+      <span>
+        <span>Регистрация</span>
+      </span>
+    </button>
+    </div>
+
+  </mat-toolbar>
+  <router-outlet></router-outlet>
+
+</mat-sidenav-container>
+
+

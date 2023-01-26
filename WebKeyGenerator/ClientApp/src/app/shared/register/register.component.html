@@ -1,0 +1,52 @@
+
+
+<mat-card>
+  <form [formGroup]="user" autocomplete="off">
+    <mat-card-header>
+      <mat-card-title>
+        {{header}}
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Роль</mat-label>
+          <mat-select formControlName="role">
+            <mat-option [value]="suser">Клиент</mat-option>
+            <mat-option [value]="doctor">Врач </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field style="width:100%">
+          <mat-label>Логин</mat-label>
+          <input autocomplete="off" matInput placeholder="Логин" formControlName="login">
+        </mat-form-field>
+      </div>
+
+
+      <div>
+        <mat-form-field style="width:100%">
+          <mat-label>Email</mat-label>
+          <input autocomplete="off" matInput placeholder="Email" formControlName="email">
+        </mat-form-field>
+      </div>
+
+
+      <div>
+        <mat-form-field style="width:55%">
+          <mat-label matTooltip="Новый пароль (оставьте поле пустым, чтобы не менять текущий)">Пароль</mat-label>
+          <input autocomplete="off" [type]="show ? 'text' : 'password'" matInput placeholder="Пароль" formControlName="password">
+          <mat-icon (click)="changeShow()" matSuffix>visibility</mat-icon>
+        </mat-form-field>
+        <button type="button" mat-button (click)="generatePass()">Сгенерировать</button>
+      </div>
+
+    </mat-card-content>
+    <mat-card-actions style="padding-left:10%;padding-right:10%">
+      <button cdkFocusInitial type="submit" (keyup.enter)="keyUpFunction($event)" mat-raised-button color="primary" style="width: 40%" (click)="apply()" #btnRef="matButton">Сохранить</button>
+      <button mat-raised-button style="width: 40%" (click)="onNoClick()">Отмена</button>
+    </mat-card-actions>
+  </form>
+</mat-card>

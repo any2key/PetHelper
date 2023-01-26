@@ -1,0 +1,28 @@
+table {
+  width: 100%;
+}
+
+.mat-elevation-z8 {
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 10%;
+}
+
+.header {
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-top: 5%;
+  text-align: center
+}
+
+h4 {
+  padding-top: 2%
+}
+::ng-deep .mat-form-field-disabled .mat-input-element {
+  color: #000000 !important;
+}
+.float {
+  position: fixed;
+  bottom: 100px;
+  right: 100px;
+}

@@ -1,0 +1,32 @@
+
+  <mat-card [formGroup]="login">
+    <mat-card-header>
+      <mat-card-title>
+        Авторизация
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div>
+        <mat-form-field style="width:100%">
+          <mat-label>Логин</mat-label>
+          <input matInput (keyup.enter)="loginMe()" placeholder="Логин" formControlName="Login">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field style="width:100%">
+          <mat-label>Пароль</mat-label>
+          <input type="password" (keyup.enter)="loginMe()" matInput placeholder="Пароль" formControlName="Password">
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <mat-card-actions style="display:flex">
+      <button type="submit" mat-raised-button color="primary" (keyup.enter)="keyUpFunction($event)" style="width:40%" (click)="loginMe()">Войти</button>
+      <button type="submit" mat-raised-button  style="width:40%;margin-left:auto">Отмена</button>
+    </mat-card-actions>
+  </mat-card>
+
+
+
+
+
+
