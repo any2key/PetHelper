@@ -25,7 +25,12 @@ namespace WebKeyGenerator.Services
         #endregion
 
 
-      
+        #region Doctor
+        void CreateRequest(DoctorRequest req, IConfiguration config);
+        #endregion
+
+
+
 
 
 

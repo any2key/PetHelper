@@ -298,3 +298,48 @@ export interface ThreeDSecure {
   method_completed: boolean | null;
   challenge_completed: boolean | null;
 }
+
+
+export class Speciality {
+  id!: number;
+  name!: string;
+  doctors: Doctor[]=[];
+}
+
+
+export class DoctorRequest {
+  photo: string;
+  summary: string;
+  empHistory: string;
+  degree: string;
+  name: string;
+  lastname: string;
+  middlename: string;
+  startWork: number;
+  about: string;
+  email: string;
+  specs: number[];
+
+  constructor()
+  {
+    this.photo = "";
+  }
+}
+
+
+export class Doctor {
+  id: number;
+  name: string;
+  lastname: string;
+  middlename: string;
+  startWork: number;
+  photo: string;
+  summaryPath: string;
+  empHistoryPath: string;
+  degreePath: string;
+  specialties: Speciality[];
+  about: string;
+  email: string;
+  confirm: boolean;
+  user: User;
+}

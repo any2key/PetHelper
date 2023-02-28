@@ -57,8 +57,6 @@ export class RegisterComponent implements OnInit {
   }
   user = new FormGroup(
     {
-      role: new FormControl('', [Validators.required]),
-      login: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.email, Validators.required]),
       password: new FormControl(''),
     });
@@ -76,6 +74,8 @@ export class RegisterComponent implements OnInit {
     }
     const p: User = this.user.value;
     p.id = this.data.id;
+    p.role = this.suser;
+    p.login = p.email;
     p.passwordsalt = '';
     p.refreshtokens = [];
     p.active = this.data.active;
@@ -91,11 +91,6 @@ export class RegisterComponent implements OnInit {
         this.dialogRef.close(result);
       }
     });
-
-
-
-
-
   }
 
 }

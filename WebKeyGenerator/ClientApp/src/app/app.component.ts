@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { TokenService } from './services/token.service';
 import { UiService } from './services/ui.service';
 import { UserService } from './services/user.service';
+import { EntryComponent } from './shared/entry/entry.component';
 import { LoginComponent } from './shared/login/login.component';
 import { RegisterComponent } from './shared/register/register.component';
 
@@ -56,6 +57,8 @@ export class AppComponent {
       }
     });
   }
+
+ 
 
 
 

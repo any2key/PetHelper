@@ -11,6 +11,7 @@ namespace WebKeyGenerator.Context
         public DbSet<User> Users { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Specialty> Specialties { get; set; }
+        public DbSet<Doctor> Doctors { get; set; }
 
 
 
@@ -30,7 +31,7 @@ namespace WebKeyGenerator.Context
                     new User
                     {
                         Id = 1,
-                        Login = "admin",
+                        Login = "admin@admin.admin",
                         Active = true,
                         Role = "admin",
                         Email = "admin@admin.admin",

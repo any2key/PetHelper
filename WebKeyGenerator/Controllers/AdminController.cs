@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using PetHelper.Models.Buisness;
 using WebKeyGenerator.Models.Buisness;
 using WebKeyGenerator.Models.Identity;
 using WebKeyGenerator.Models.Requests;
@@ -82,6 +83,32 @@ namespace WebKeyGenerator.Controllers
             });
         }
 
+        [HttpGet]
+       // [Authorize(Roles = "admin")]
+        [Route("fetchspec")]
+        public async Task<IActionResult> FetchSpec()
+        {
+            return SafeRun(_ =>
+            {
+
+                return new DataResponse<IEnumerable<Specialty>>() { Data = dataService.Specialties(), IsOk = true };
+
+            });
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "admin")]
+        [Route("addspec")]
+        public async Task<IActionResult> AddSpec([FromBody] Specialty spec)
+        {
+            return SafeRun(_ =>
+            {
+
+                dataService.AddSpeciality(spec);
+                return WebKeyGenerator.Models.Responses.Response.OK;
+
+            });
+        }
 
     }
 }

@@ -112,7 +112,6 @@ namespace WebKeyGenerator.Services
         }
 
 
-
         public IEnumerable<User> Fetch()
         {
             var res = db.Users.ToArray();
@@ -121,7 +120,7 @@ namespace WebKeyGenerator.Services
 
         public Specialty GetSpecialty(int id)
         {
-            
+
             return db.Specialties.FirstOrDefault(e => e.Id == id);
         }
 
@@ -134,7 +133,7 @@ namespace WebKeyGenerator.Services
         }
 
 
-      
+
 
 
         public void RemoveUser(int userId)
@@ -153,6 +152,83 @@ namespace WebKeyGenerator.Services
             return db.Specialties.ToArray();
         }
 
+
+        #endregion
+
+        #region Doctor
+        public void CreateRequest(DoctorRequest req, IConfiguration config)
+        {
+            var root = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            var path = Path.Combine(root, $"{req.Email}");
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+
+            if (db.Users.Any(e => e.Email.ToLower() == req.Email.ToLower()))
+                throw new Exception($"В системе уже есть пользователь с email {req.Email}");
+            Doctor doctor = new Doctor()
+            {
+                About = req.About,
+                Confirm = false,
+                Email = req.Email,
+                Lastname = req.Lastname,
+                Name = req.Name,
+                Middlename = req.Middlename,
+                StartWork = req.StartWork,
+                Photo = req.Photo,
+            };
+            if (!String.IsNullOrEmpty(req.Summary))
+            {
+                var sumPath = Path.Combine(path, $"summary.pdf");
+                File.WriteAllBytes(sumPath, Convert.FromBase64String(req.Summary));
+                doctor.SummaryPath = sumPath;
+            }
+            if (!String.IsNullOrEmpty(req.EmpHistory))
+            {
+                var sumPath = Path.Combine(path, $"empHistory.pdf");
+                File.WriteAllBytes(sumPath, Convert.FromBase64String(req.EmpHistory));
+                doctor.SummaryPath = sumPath;
+            }
+            if (!String.IsNullOrEmpty(req.Degree))
+            {
+                var sumPath = Path.Combine(path, $"degree.pdf");
+                File.WriteAllBytes(sumPath, Convert.FromBase64String(req.Degree));
+                doctor.DegreePath = sumPath;
+            }
+
+            doctor.Specialties = new List<Specialty>();
+
+            foreach (var s in req.Specs)
+            {
+                doctor.Specialties.Add(db.Specialties.First(e => e.Id == s));
+            }
+
+
+            var password = Ext.RandomPassword();
+            AddOrUpdateUser(new User() 
+            {
+            Id=-1,
+            Active=true,
+            Email=req.Email,
+            Login=req.Email,
+            Password=password,
+            PasswordSalt=String.Empty,
+            Role="doctor"
+            });
+            doctor.User = db.Users.First(e => e.Email.ToLower() == req.Email.ToLower());
+
+            try
+            {
+
+                Email.Send(config, $"Ваша заявка принята.\r\n" +
+                    $"Ваша учетная запись будет активирована после проверки администратором." +
+                    $"\r\n Ваш пароль для входа в систему {password}. ", req.Email);
+            }
+            catch { }
+
+            db.Doctors.Add(doctor);
+            db.SaveChanges();
+
+        }
 
         #endregion
 

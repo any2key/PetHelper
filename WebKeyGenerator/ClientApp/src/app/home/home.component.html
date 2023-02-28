@@ -4,7 +4,7 @@
       <button style="font-size: xx-large; padding: 50px; width: 100%" mat-raised-button color="primary">Онлайн-консультация</button>
     </div>
     <div style="margin-top:5%;width:100%">
-      <button style="font-size: xx-large;padding:50px;width:100%" mat-raised-button color="primary">Стать частью команды</button>
+      <button *ngIf="!isLogin" (click)="openEntry()" style="font-size: xx-large;padding:50px;width:100%" mat-raised-button color="primary">Стать частью команды</button>
     </div>
   </div>
 </div>

@@ -23,6 +23,7 @@ import { UserModule } from './user/user.module';
 import { SuccessModalComponent } from './success-modal/success-modal.component';
 import { LoginComponent } from './shared/login/login.component';
 import { RegisterComponent } from './shared/register/register.component';
+import { EntryComponent } from './shared/entry/entry.component';
 
 
 
@@ -36,6 +37,7 @@ import { RegisterComponent } from './shared/register/register.component';
     SuccessModalComponent,
     LoginComponent,
     RegisterComponent,
+    EntryComponent,
   ],
   imports: [
     BrowserModule,
