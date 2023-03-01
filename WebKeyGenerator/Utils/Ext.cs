@@ -122,7 +122,7 @@ namespace WebKeyGenerator.Utils
         public static void Send(IConfiguration config, string msg, string to = "writeto@any2key.ru")
         {
             var message = new MimeMessage();
-            message.From.Add(new MailboxAddress("Pet helper", "pet@helper.ru"));
+            message.From.Add(new MailboxAddress("Pet helper", config["Smtp:login"]));
             message.To.Add(new MailboxAddress(to, to));
             message.Subject = $"Обращение от администрации Pet Helper";
             ServicePointManager.SecurityProtocol = SecurityProtocolType.SystemDefault;

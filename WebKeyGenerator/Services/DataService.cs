@@ -223,7 +223,12 @@ namespace WebKeyGenerator.Services
                     $"Ваша учетная запись будет активирована после проверки администратором." +
                     $"\r\n Ваш пароль для входа в систему {password}. ", req.Email);
             }
-            catch { }
+            catch (Exception ex)
+            {
+                db.Users.Remove(db.Users.First(e => e.Email.ToLower() == req.Email.ToLower()));
+                db.SaveChanges();
+                throw ex;
+            }
 
             db.Doctors.Add(doctor);
             db.SaveChanges();
