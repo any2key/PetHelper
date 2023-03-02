@@ -3,17 +3,19 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebKeyGenerator.Context;
 
 #nullable disable
 
-namespace WebKeyGenerator.Migrations
+namespace PetHelper.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230302174452_schedulle")]
+    partial class schedulle
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,7 +77,7 @@ namespace WebKeyGenerator.Migrations
                     b.Property<string>("Photo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SchedulleId")
+                    b.Property<int>("SchedulleId")
                         .HasColumnType("int");
 
                     b.Property<int>("StartWork")
@@ -110,7 +112,7 @@ namespace WebKeyGenerator.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Schedulle");
+                    b.ToTable("Schedulles");
                 });
 
             modelBuilder.Entity("PetHelper.Models.Buisness.Specialty", b =>
@@ -229,7 +231,9 @@ namespace WebKeyGenerator.Migrations
                 {
                     b.HasOne("PetHelper.Models.Buisness.Schedulle", "Schedulle")
                         .WithMany()
-                        .HasForeignKey("SchedulleId");
+                        .HasForeignKey("SchedulleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("WebKeyGenerator.Models.Identity.User", "User")
                         .WithMany()

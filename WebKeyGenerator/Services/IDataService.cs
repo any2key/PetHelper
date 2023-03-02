@@ -37,6 +37,8 @@ namespace WebKeyGenerator.Services
         void CreateRequest(DoctorRequest req, IConfiguration config);
 
         bool GetConfirm(int id);
+
+        Schedulle GetSchedulle(int id);
         #endregion
 
 

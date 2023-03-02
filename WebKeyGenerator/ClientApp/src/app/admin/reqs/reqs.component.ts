@@ -59,6 +59,7 @@ export class ReqsComponent implements OnInit {
         });
         this.ui.show('Успешно');
       }
+      this.refreshTable();
 
     });
   }

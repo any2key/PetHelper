@@ -24,6 +24,10 @@ import { SuccessModalComponent } from './success-modal/success-modal.component';
 import { LoginComponent } from './shared/login/login.component';
 import { RegisterComponent } from './shared/register/register.component';
 import { EntryComponent } from './shared/entry/entry.component';
+import { DoctorModule } from './doctor/doctor.module';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { DateAdapter, MatNativeDateModule } from '@angular/material/core';
+import { CustomDateAdapter } from './custom-date-adapter.ts';
 
 
 
@@ -50,10 +54,14 @@ import { EntryComponent } from './shared/entry/entry.component';
     BrowserAnimationsModule,
     AdminModule,
     UserModule,
+    DoctorModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [
     AuthInterceptorProvider,
-    ErrorInterceptorProvider
+    ErrorInterceptorProvider,
+    { provide: DateAdapter, useClass: CustomDateAdapter }
   ],
   bootstrap: [AppComponent]
 })

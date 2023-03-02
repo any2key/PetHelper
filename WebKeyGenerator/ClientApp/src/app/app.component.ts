@@ -26,6 +26,7 @@ export class AppComponent implements OnInit {
 
 
 
+  confirm = false;
   constructor(private api: ApiService, private userSerive: UserService, private tokenService: TokenService, private router: Router, public ui: UiService, public dialog: MatDialog) {
 
   }
@@ -42,12 +43,15 @@ export class AppComponent implements OnInit {
       {
         if (res.isOk)
           this.confirm = res.data;
+
+        console.log(res);
       });
     }
     }
 
-
-  confirm = false;
+  get Confirm() {
+    return this.confirm;
+  }
 
   get Role() {
     return this.tokenService.getSession()?.userRole;

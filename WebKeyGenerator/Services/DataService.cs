@@ -215,6 +215,7 @@ namespace WebKeyGenerator.Services
                 Middlename = req.Middlename,
                 StartWork = req.StartWork,
                 Photo = req.Photo,
+                Schedulle = new Schedulle() { SchedulleJson = new List<SchedulleInstantiate>().ToJson() }
             };
             if (!String.IsNullOrEmpty(req.Summary))
             {
@@ -226,7 +227,7 @@ namespace WebKeyGenerator.Services
             {
                 var sumPath = Path.Combine(path, $"empHistory.pdf");
                 File.WriteAllBytes(sumPath, Convert.FromBase64String(req.EmpHistory));
-                doctor.SummaryPath = sumPath;
+                doctor.EmpHistoryPath = sumPath;
             }
             if (!String.IsNullOrEmpty(req.Degree))
             {
@@ -242,7 +243,7 @@ namespace WebKeyGenerator.Services
                 doctor.Specialties.Add(db.Specialties.First(e => e.Id == s));
             }
 
-            //HJEKvWSd doctor@doctor.ru
+            //Aj5xQ6G2 doctor@doctor.ru
             //TuMIRXZR doctor1@doctor.ru
 
             var password = Ext.RandomPassword();
@@ -261,9 +262,9 @@ namespace WebKeyGenerator.Services
             try
             {
 
-                Email.Send(config, $"Ваша заявка принята.\r\n" +
-                    $"Ваша учетная запись будет активирована после проверки администратором." +
-                    $"\r\n Ваш пароль для входа в систему {password}. ", req.Email);
+                //Email.Send(config, $"Ваша заявка принята.\r\n" +
+                //    $"Ваша учетная запись будет активирована после проверки администратором." +
+                //    $"\r\n Ваш пароль для входа в систему {password}. ", req.Email);
             }
             catch (Exception ex)
             {
@@ -280,9 +281,14 @@ namespace WebKeyGenerator.Services
 
         public bool GetConfirm(int id)
         {
-            var doc = db.Doctors.Include(e => e.User).FirstOrDefault(e => e.Id == id);
+            var doc = db.Doctors.Include(e => e.User).FirstOrDefault(e => e.User.Id == id);
 
             return doc.Confirm;
+        }
+        public Schedulle GetSchedulle(int id) 
+        {
+            var doc = db.Doctors.Include(e => e.User).Include(e=>e.Schedulle).FirstOrDefault(e => e.Id == id);
+            return doc.Schedulle;
         }
 
         #endregion

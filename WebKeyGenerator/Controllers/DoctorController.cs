@@ -47,5 +47,17 @@ namespace PetHelper.Controllers
                 return new DataResponse<bool>() { IsOk=true, Data=dataService.GetConfirm((int)UserID)};
             });
         }
+
+
+        [HttpGet]
+        [Route("schedulle")]
+        [Authorize]
+        public async Task<IActionResult> Schedulle()
+        {
+            return SafeRun(_ =>
+            {
+                return new DataResponse<Schedulle>() { IsOk = true, Data = dataService.GetSchedulle((int)UserID) };
+            });
+        }
     }
 }

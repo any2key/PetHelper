@@ -343,3 +343,31 @@ export class Doctor {
   confirm: boolean;
   user: User;
 }
+
+export class Schedulle {
+  id: number;
+  schedulleJson: string;
+  schedulles: SchedulleInstantiate[];
+}
+
+export class SchedulleInstantiate {
+  day: DayOfWeek;
+  begin: TimePeriod;
+  end: TimePeriod;
+  work: boolean;
+}
+
+export class TimePeriod {
+  hours: number;
+  minutes: number;
+}
+
+export enum DayOfWeek {
+  Monday = 1,
+  Tuesday,
+  Wednesday,
+  Thursday,
+  Friday,
+  Saturday,
+  Sunday
+}

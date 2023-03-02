@@ -22,6 +22,7 @@ namespace PetHelper.Models.Buisness
         public bool Confirm { get; set; }
 
         public User User { get; set; }
+        public Schedulle? Schedulle { get; set; }
 
     }
 

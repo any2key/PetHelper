@@ -12,6 +12,7 @@ namespace WebKeyGenerator.Context
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Specialty> Specialties { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
+        public DbSet<Schedulle> Schedulles { get; set; }
 
 
 
