@@ -154,7 +154,7 @@
   <mat-sidenav *ngIf="Role=='doctor'" #drawer class="sidenav" fixedInViewport mode="side" [opened]="false" [autoFocus]="false" style="width:17rem;height:100vh">
     <mat-list role="list">
       <mat-list-item *ngIf="confirm" role="listitem">
-        <button mat-button style="width:100%;text-align:start" (click)="route('/user/clients')">
+        <button mat-button style="width:100%;text-align:start" (click)="route('/doctor/schedule')">
           <span class="material-icons">
             calendar_month
           </span>
@@ -166,7 +166,7 @@
       <mat-divider></mat-divider>
 
       <mat-list-item role="listitem">
-        <button mat-button style="width:100%;text-align:start" (click)="route('/user/keys')">
+        <button mat-button style="width:100%;text-align:start" (click)="route('/doctor/consult')">
           <span class="material-icons">
             list
           </span>

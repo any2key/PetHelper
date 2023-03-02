@@ -497,12 +497,19 @@
     <None Remove="ClientApp\.angular\cache\13.3.4\babel-webpack\fdd883138a8e59f5b00c61ffd57fbff8.json" />
     <None Remove="ClientApp\.angular\cache\13.3.4\babel-webpack\ffa03e5773093b5b454a7b33d3fa60b1.json" />
     <None Remove="ClientApp\.angular\cache\13.3.4\babel-webpack\fff83a194d1ba9364d3408edc760e8eb.json" />
+    <None Remove="ClientApp\src\app\doctor\doctor.routing.ts" />
+    <None Remove="ClientApp\src\app\guards\doctorAuth.guard.ts" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="ClientApp\src\app\shared\" />
     <Folder Include="Data\" />
     <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\doctor\doctor.routing.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\guards\doctorAuth.guard.ts" />
   </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
