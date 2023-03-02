@@ -45,7 +45,7 @@
       <mat-divider></mat-divider>
 
       <mat-list-item role="listitem">
-        <button mat-button style="width:100%;text-align:start" (click)="route('/admin/reqs')">
+        <button *ngIf="ui.reqCount>0"  mat-button  matBadge="{{ui.reqCount}}"  style="width:100%;text-align:start" (click)="route('/admin/reqs')">
           <span class="material-icons">
             list
           </span>
@@ -53,6 +53,15 @@
             Заявки
           </span>
         </button>
+        <button *ngIf="ui.reqCount==0" mat-button style="width:100%;text-align:start" (click)="route('/admin/reqs')">
+          <span class="material-icons">
+            list
+          </span>
+          <span style="align-self:end">
+            Заявки
+          </span>
+        </button>
+
       </mat-list-item>
       <mat-divider></mat-divider>
 
@@ -144,25 +153,13 @@
 
   <mat-sidenav *ngIf="Role=='doctor'" #drawer class="sidenav" fixedInViewport mode="side" [opened]="false" [autoFocus]="false" style="width:17rem;height:100vh">
     <mat-list role="list">
-      <mat-list-item role="listitem">
-        <button mat-button style="width:100%;text-align:start" (click)="route('/user/key')">
-          <span class="material-icons">
-            key
-          </span>
-          <span style="align-self:end">
-            Меню врача
-          </span>
-        </button>
-      </mat-list-item>
-      <mat-divider></mat-divider>
-
-      <mat-list-item role="listitem">
+      <mat-list-item *ngIf="confirm" role="listitem">
         <button mat-button style="width:100%;text-align:start" (click)="route('/user/clients')">
           <span class="material-icons">
-            group
+            calendar_month
           </span>
           <span style="align-self:end">
-            Меню врача
+            Мое расписание
           </span>
         </button>
       </mat-list-item>
@@ -174,7 +171,7 @@
             list
           </span>
           <span style="align-self:end">
-            Меню врача
+            Консультации
           </span>
         </button>
       </mat-list-item>
@@ -223,7 +220,7 @@
     </div>
 
   </mat-toolbar>
-  <router-outlet></router-outlet>
+  <router-outlet ></router-outlet>
 
 </mat-sidenav-container>
 

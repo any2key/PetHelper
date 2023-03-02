@@ -2,6 +2,8 @@
 using WebKeyGenerator.Services;
 using Microsoft.AspNetCore.Mvc;
 using PetHelper.Models.Buisness;
+using Microsoft.AspNetCore.Authorization;
+using WebKeyGenerator.Models.Responses;
 
 namespace PetHelper.Controllers
 {
@@ -31,6 +33,18 @@ namespace PetHelper.Controllers
             {
                 dataService.CreateRequest(req,config);
                 return WebKeyGenerator.Models.Responses.Response.OK;
+            });
+        }
+
+
+        [HttpGet]
+        [Route("getconfirm")]
+        [Authorize]
+        public async Task<IActionResult> GetConfirm()
+        {
+            return SafeRun(_ =>
+            {
+                return new DataResponse<bool>() { IsOk=true, Data=dataService.GetConfirm((int)UserID)};
             });
         }
     }

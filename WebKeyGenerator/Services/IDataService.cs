@@ -22,11 +22,21 @@ namespace WebKeyGenerator.Services
 
         IEnumerable<Specialty> Specialties();
 
+
+        IEnumerable<Doctor> Requests();
+        int ReqsCount();
+
+        void ActivateRequest(int id, IConfiguration config);
+
+        Stream GetFiles(int id);
+
         #endregion
 
 
         #region Doctor
         void CreateRequest(DoctorRequest req, IConfiguration config);
+
+        bool GetConfirm(int id);
         #endregion
 
 

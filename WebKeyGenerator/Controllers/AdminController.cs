@@ -18,12 +18,22 @@ namespace WebKeyGenerator.Controllers
         private readonly IUserService userService;
         private readonly ITokenService tokenService;
         private readonly IDataService dataService;
+        private readonly IConfiguration config;
         private readonly ILogger<AdminController> _logger;
-        public AdminController(IUserService userService, ITokenService tokenService, IDataService dataService)
+
+
+        string zipFolder;
+        string rootpath;
+
+        public AdminController(IUserService userService, ITokenService tokenService, IDataService dataService, IConfiguration config, IWebHostEnvironment env)
         {
             this.userService = userService;
             this.tokenService = tokenService;
             this.dataService = dataService;
+            this.config = config;
+
+            zipFolder= Path.Combine(env.ContentRootPath, "zips");
+            rootpath = env.ContentRootPath;
         }
 
         [HttpGet]
@@ -108,6 +118,52 @@ namespace WebKeyGenerator.Controllers
                 return WebKeyGenerator.Models.Responses.Response.OK;
 
             });
+        }
+
+
+        [HttpGet]
+        [Route("reqscount")]
+        public async Task<IActionResult> ReqsCount()
+        {
+            return SafeRun(_ => 
+            {
+                return new DataResponse<int>() {IsOk=true,Data= dataService.ReqsCount() };
+            });
+        }
+
+        [HttpGet]
+        [Route("reqs")]
+        public async Task<IActionResult> Reqs()
+        {
+            return SafeRun(_ => 
+            {
+                return new DataResponse<IEnumerable<Doctor>>() {IsOk=true,Data=dataService.Requests() };
+            });
+        }
+
+        [HttpGet]
+        [Route("activatereq")]
+        public async Task<IActionResult> activatereq(int id)
+        {
+            return SafeRun(_ =>
+            {
+                dataService.ActivateRequest(id,config);
+                return WebKeyGenerator.Models.Responses.Response.OK;
+            });
+        }
+
+
+        [HttpGet]
+        [Route("download")]
+        public async Task<IActionResult> Download(int id) 
+        {
+            var mimeType = "application/zip";
+
+            return new FileStreamResult(dataService.GetFiles(id), mimeType)
+            {
+                FileDownloadName = "data.zip"
+            };
+
         }
 
     }

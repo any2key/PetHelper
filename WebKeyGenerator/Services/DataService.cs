@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PetHelper.Models.Buisness;
 using System.Globalization;
+using System.IO.Compression;
 using WebKeyGenerator.Context;
 using WebKeyGenerator.Models.Buisness;
 using WebKeyGenerator.Models.Identity;
@@ -133,6 +134,22 @@ namespace WebKeyGenerator.Services
         }
 
 
+        public IEnumerable<Doctor> Requests()
+        {
+            return db.Doctors.Where(e => !e.Confirm).ToArray();
+        }
+        public int ReqsCount()
+        {
+            return db.Doctors.Where(e => !e.Confirm).ToArray().Length;
+        }
+
+        public void ActivateRequest(int id, IConfiguration config)
+        {
+            var req = db.Doctors.FirstOrDefault(e => e.Id == id);
+            req.Confirm = true;
+            Email.Send(config, $"Ваша учетная запись подтверждена администратором.", req.Email);
+            db.SaveChanges();
+        }
 
 
 
@@ -150,6 +167,29 @@ namespace WebKeyGenerator.Services
         public IEnumerable<Specialty> Specialties()
         {
             return db.Specialties.ToArray();
+        }
+
+        public Stream GetFiles(int id)
+        {
+            var req = db.Doctors.FirstOrDefault(e => e.Id == id);
+            var root = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            var path = Path.Combine(root, $"{req.Email}");
+
+            var zips = Path.Combine(root, $"zips");
+            var zip = Path.Combine(zips, $"{req.Email}.zip");
+
+            if (!Directory.Exists(zips))
+                Directory.CreateDirectory(zips);
+
+
+
+            if (File.Exists(zip))
+            {
+                File.Delete(zip);
+            }
+            ZipFile.CreateFromDirectory(path, zip);
+
+            return File.OpenRead(zip);
         }
 
 
@@ -202,17 +242,19 @@ namespace WebKeyGenerator.Services
                 doctor.Specialties.Add(db.Specialties.First(e => e.Id == s));
             }
 
+            //HJEKvWSd doctor@doctor.ru
+            //TuMIRXZR doctor1@doctor.ru
 
             var password = Ext.RandomPassword();
-            AddOrUpdateUser(new User() 
+            AddOrUpdateUser(new User()
             {
-            Id=-1,
-            Active=true,
-            Email=req.Email,
-            Login=req.Email,
-            Password=password,
-            PasswordSalt=String.Empty,
-            Role="doctor"
+                Id = -1,
+                Active = true,
+                Email = req.Email,
+                Login = req.Email,
+                Password = password,
+                PasswordSalt = String.Empty,
+                Role = "doctor"
             });
             doctor.User = db.Users.First(e => e.Email.ToLower() == req.Email.ToLower());
 
@@ -233,6 +275,14 @@ namespace WebKeyGenerator.Services
             db.Doctors.Add(doctor);
             db.SaveChanges();
 
+        }
+
+
+        public bool GetConfirm(int id)
+        {
+            var doc = db.Doctors.Include(e => e.User).FirstOrDefault(e => e.Id == id);
+
+            return doc.Confirm;
         }
 
         #endregion

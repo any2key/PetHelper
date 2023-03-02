@@ -1,6 +1,7 @@
 import { ModuleWithProviders } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AdminAuthGuard } from '../guards/adminAuth.guard';
+import { ReqsComponent } from './reqs/reqs.component';
 
 import { RootComponent } from './root/root.component';
 import { SpecialitiesComponent } from './specialities/specialities.component';
@@ -18,6 +19,7 @@ export const routing: ModuleWithProviders<any> = RouterModule.forChild([
       { path: 'home', component: UsersComponent },
       { path: 'users', component: UsersComponent },
       { path: 'spec', component: SpecialitiesComponent },
+      { path: 'reqs', component: ReqsComponent },
 
 
     ]

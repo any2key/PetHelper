@@ -27,6 +27,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatStepperModule } from '@angular/material/stepper';
 import { ClipboardModule } from '@angular/cdk/clipboard';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
 
@@ -44,6 +45,7 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
     MatAutocompleteModule,
     MatMenuModule,
     MatStepperModule,
+    MatBadgeModule
   ],
   exports: [CommonModule,
     MatInputModule,
@@ -71,7 +73,8 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
     MatAutocompleteModule,
     MatMenuModule,
     MatStepperModule,
-    ClipboardModule
+    ClipboardModule,
+    MatBadgeModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'ru-RU' },

@@ -27,6 +27,10 @@ export class UiService {
     return dialogRef.afterClosed();
   }
 
+  reqcount = 0;
+  get reqCount() {
+    return this.reqcount;
+  }
 
   successModal() {
     const dialogRef = this.dialog.open(SuccessModalComponent, {

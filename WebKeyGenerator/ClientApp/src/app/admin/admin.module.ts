@@ -8,6 +8,7 @@ import { routing } from './admin.routing';
 import { AddUserComponent } from './users/add-user/add-user.component';
 import { SpecialitiesComponent } from './specialities/specialities.component';
 import { AddSpecialtyComponent } from './specialities/add-specialty/add-specialty.component';
+import { ReqsComponent } from './reqs/reqs.component';
 
 
 
@@ -19,6 +20,7 @@ import { AddSpecialtyComponent } from './specialities/add-specialty/add-specialt
     AddUserComponent,
     SpecialitiesComponent,
     AddSpecialtyComponent,
+    ReqsComponent,
   ],
   imports: [
     CommonModule,

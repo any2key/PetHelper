@@ -1,7 +1,9 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
+import { DataResponse } from './model';
+import { ApiService } from './services/api.service';
 import { TokenService } from './services/token.service';
 import { UiService } from './services/ui.service';
 import { UserService } from './services/user.service';
@@ -15,13 +17,37 @@ import { RegisterComponent } from './shared/register/register.component';
   styleUrls: ['./app.component.css']
 
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'app';
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
-  constructor(private userSerive: UserService, private tokenService: TokenService, private router: Router, private ui: UiService, public dialog: MatDialog) {
+
+  reqsCount = 0;
+
+
+
+  constructor(private api: ApiService, private userSerive: UserService, private tokenService: TokenService, private router: Router, public ui: UiService, public dialog: MatDialog) {
 
   }
+  ngOnInit(): void {
+    this.api.getData<DataResponse<number>>('admin/reqscount').subscribe(res =>
+    {
+      if (res.isOk)
+        this.ui.reqcount = res.data;
+    });
+
+    if (this.Role == "doctor")
+    {
+      this.api.getData<DataResponse<boolean>>(`doctor/getconfirm`).subscribe(res =>
+      {
+        if (res.isOk)
+          this.confirm = res.data;
+      });
+    }
+    }
+
+
+  confirm = false;
 
   get Role() {
     return this.tokenService.getSession()?.userRole;
@@ -57,10 +83,6 @@ export class AppComponent {
       }
     });
   }
-
- 
-
-
 
   logout() {
     this.ui.confirmation().subscribe(res => {
