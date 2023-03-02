@@ -1,19 +1,57 @@
 <mat-toolbar>
   <span>Расписание</span>
 </mat-toolbar>
-<div style="margin-left:30%;margin-right:30%">
-  <mat-card class="demo-inline-calendar-card">
-    <mat-calendar [dateClass]="dateClass"></mat-calendar>
-  </mat-card>
+<button (click)="save()" mat-fab color="primary" class="float">
+  <mat-icon>save</mat-icon>
+</button>
+<div class="split left" style="margin-top:10%;margin-bottom:15px">
+  <div>
+    <div style="max-height:500px;overflow-y:auto">
+      <mat-card *ngFor="let s of myShedulles" id="line_block">
+        <span *ngIf="s.day==1"><b>Понедельник</b></span>
+        <span *ngIf="s.day==2"><b>Вторник</b></span>
+        <span *ngIf="s.day==3"><b>Среда</b></span>
+        <span *ngIf="s.day==4"><b>Четверг</b></span>
+        <span *ngIf="s.day==5"><b>Пятница</b></span>
+        <span *ngIf="s.day==6"><b>Суббота</b></span>
+        <span *ngIf="s.day==7"><b>Воскресенье</b></span>
+        <mat-card-content>
+          <div style="text-align:left">
+            <mat-checkbox (change)="changed()" class="example-margin" [(ngModel)]="s.work">Работаю</mat-checkbox>
+          </div>
+          <div style="text-align:left;width:40%;display:block;float:left">
+            <mat-label>Начало</mat-label>
+            <ngx-mat-timepicker [(ngModel)]="s.dateBegin" [disabled]="!s.work"
+                                [stepHour]="1" [stepMinute]="1"
+                                [stepSecond]="1">
+            </ngx-mat-timepicker>
+          </div>
+          <div style="text-align:left;width:40%;display:block;float:left">
+            <mat-label>Конец</mat-label>
+            <ngx-mat-timepicker [(ngModel)]="s.dateEnd" [disabled]="!s.work"
+                                [stepHour]="1" [stepMinute]="1"
+                                [stepSecond]="1">
+            </ngx-mat-timepicker>
+          </div>
+
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+
+
 </div>
-<div style="margin-left:5%;margin-right:5%;margin-top:5%;margin-bottom:25px">
-  <mat-card *ngFor="let s of myShedulles" style="width:200px" id="line_block">
-    oko
-  </mat-card>
+
+<div class="split right" style="margin-top:3%">
+  <div class="centered">
+    <div style="margin-left:2%;margin-right:2%">
+      <mat-card class="demo-inline-calendar-card">
+        <mat-calendar #calendar [dateClass]="dateClass"></mat-calendar>
+      </mat-card>
+    </div>
+  </div>
 </div>
-
-
-
 
 
 

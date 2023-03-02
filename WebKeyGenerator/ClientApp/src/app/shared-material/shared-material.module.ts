@@ -28,6 +28,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatStepperModule } from '@angular/material/stepper';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { MatBadgeModule } from '@angular/material/badge';
+import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 
 @NgModule({
 
@@ -45,7 +46,11 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatAutocompleteModule,
     MatMenuModule,
     MatStepperModule,
-    MatBadgeModule
+    MatBadgeModule,
+    NgxMatTimepickerModule,
+    NgxMatDatetimePickerModule,
+    NgxMatNativeDateModule,
+    
   ],
   exports: [CommonModule,
     MatInputModule,
@@ -74,7 +79,11 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatMenuModule,
     MatStepperModule,
     ClipboardModule,
-    MatBadgeModule
+    MatBadgeModule,
+    NgxMatTimepickerModule,
+    NgxMatDatetimePickerModule,
+    NgxMatNativeDateModule,
+
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'ru-RU' },

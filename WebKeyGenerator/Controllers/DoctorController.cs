@@ -59,5 +59,18 @@ namespace PetHelper.Controllers
                 return new DataResponse<Schedulle>() { IsOk = true, Data = dataService.GetSchedulle((int)UserID) };
             });
         }
+
+        [HttpPost]
+        [Route("saveschedulle")]
+        [Authorize]
+        public async Task<IActionResult> SaveSchedulle(SchedulleInstantiate[] req)
+        {
+            return SafeRun(_ =>
+            {
+                dataService.SaveSchedulle(req, (int)UserID);
+                return WebKeyGenerator.Models.Responses.Response.OK;
+            });
+        }
+        
     }
 }

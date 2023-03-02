@@ -1,18 +1,63 @@
 
-
+.demo-inline-calendar-card{
+    width:300px;
+}
 
 button.example-custom-date-class {
   background: green;
   border-radius: 30%;
-  
 }
 
 #line_block {
   float: left;
   margin-left: 25px;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   text-align: center;
-  height: 150px;
-  width: 200px;
+  height: 200px;
+  width: 250px;
+  display:block
   /*padding: 10px;*/
+}
+/* Split the screen in half */
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+/* Control the left side */
+.left {
+  left: 0;
+}
+
+/* Control the right side */
+.right {
+  right: 0;
+}
+
+/* If you want the content centered horizontally and vertically */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+  /* Style the image inside the centered container, if needed */
+  .centered img {
+    width: 800px;
+    /*border-radius: 50%;*/
+  }
+.float {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 40px;
+  right: 40px;
+  z-index:2
 }

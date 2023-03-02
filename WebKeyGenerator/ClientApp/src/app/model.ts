@@ -355,6 +355,8 @@ export class SchedulleInstantiate {
   begin: TimePeriod;
   end: TimePeriod;
   work: boolean;
+  dateBegin: Date;
+  dateEnd: Date;
 }
 
 export class TimePeriod {

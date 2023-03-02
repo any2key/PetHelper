@@ -39,6 +39,7 @@ namespace WebKeyGenerator.Services
         bool GetConfirm(int id);
 
         Schedulle GetSchedulle(int id);
+        void SaveSchedulle(SchedulleInstantiate[] req,int id);
         #endregion
 
 
