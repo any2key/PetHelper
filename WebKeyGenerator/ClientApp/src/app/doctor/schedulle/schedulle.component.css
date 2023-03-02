@@ -1,10 +1,18 @@
 
-.demo-inline-calendar-card {
-  width: 300px;
-}
+
 
 button.example-custom-date-class {
   background: green;
   border-radius: 30%;
   
+}
+
+#line_block {
+  float: left;
+  margin-left: 25px;
+  margin-bottom: 20px;
+  text-align: center;
+  height: 150px;
+  width: 200px;
+  /*padding: 10px;*/
 }
