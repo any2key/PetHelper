@@ -146,10 +146,11 @@ namespace WebKeyGenerator.Services
         public void ActivateRequest(int id, IConfiguration config)
         {//fZLoHVn3
             var req = db.Doctors.Include(e=>e.User).FirstOrDefault(e => e.Id == id);
-            req.User.Password = Ext.RandomPassword();
+            var pass= Ext.RandomPassword();
+            req.User.Password = pass;
             AddOrUpdateUser(req.User);
             req.Confirm = true;
-            Email.Send(config, $"Ваша учетная запись подтверждена администратором.\r\nВаш пароль для входа в систему: {req.User.Password}", req.Email);
+            Email.Send(config, $"Ваша учетная запись подтверждена администратором.\r\nВаш пароль для входа в систему: {pass}", req.Email);
             db.SaveChanges();
         }
 
