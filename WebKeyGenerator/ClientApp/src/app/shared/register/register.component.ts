@@ -73,12 +73,12 @@ export class RegisterComponent implements OnInit {
       return;
     }
     const p: User = this.user.value;
-    p.id = this.data.id;
+    p.id = -1;
     p.role = this.suser;
     p.login = p.email;
     p.passwordsalt = '';
     p.refreshtokens = [];
-    p.active = this.data.active;
+    p.active = true;
     const result = { isOk: true, data: p };
     result.isOk = true;
     result.data = p;

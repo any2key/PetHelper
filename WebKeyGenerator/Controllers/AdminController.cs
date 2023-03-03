@@ -51,7 +51,7 @@ namespace WebKeyGenerator.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "admin")]
+       // [Authorize(Roles = "admin")]
         [Route("AddOrUpdateUser")]
         public async Task<IActionResult> AddOrUpdateUser(User user)
         {
