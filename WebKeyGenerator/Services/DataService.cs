@@ -144,10 +144,12 @@ namespace WebKeyGenerator.Services
         }
 
         public void ActivateRequest(int id, IConfiguration config)
-        {
-            var req = db.Doctors.FirstOrDefault(e => e.Id == id);
+        {//fZLoHVn3
+            var req = db.Doctors.Include(e=>e.User).FirstOrDefault(e => e.Id == id);
+            req.User.Password = Ext.RandomPassword();
+            AddOrUpdateUser(req.User);
             req.Confirm = true;
-            Email.Send(config, $"Ваша учетная запись подтверждена администратором.", req.Email);
+            Email.Send(config, $"Ваша учетная запись подтверждена администратором.\r\nВаш пароль для входа в систему: {req.User.Password}", req.Email);
             db.SaveChanges();
         }
 
@@ -263,8 +265,7 @@ namespace WebKeyGenerator.Services
             {
 
                 Email.Send(config, $"Ваша заявка принята.\r\n" +
-                    $"Ваша учетная запись будет активирована после проверки администратором." +
-                    $"\r\n Ваш пароль для входа в систему {password}. ", req.Email);
+                    $"Ваша учетная запись будет активирована после проверки администратором.");
             }
             catch (Exception ex)
             {
