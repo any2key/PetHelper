@@ -30,6 +30,7 @@ import { DateAdapter, MatNativeDateModule } from '@angular/material/core';
 import { CustomDateAdapter } from './custom-date-adapter.ts';
 import { SpecListComponent } from './shared/spec-list/spec-list.component';
 import { SpecDoctorsComponent } from './shared/spec-doctors/spec-doctors.component';
+import { AppointmentComponent } from './shared/spec-doctors/appointment/appointment.component';
 
 
 
@@ -46,6 +47,7 @@ import { SpecDoctorsComponent } from './shared/spec-doctors/spec-doctors.compone
     EntryComponent,
     SpecListComponent,
     SpecDoctorsComponent,
+    AppointmentComponent,
   ],
   imports: [
     BrowserModule,
