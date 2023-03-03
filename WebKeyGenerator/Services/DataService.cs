@@ -307,12 +307,12 @@ namespace WebKeyGenerator.Services
         }
         public Schedulle GetSchedulle(int id) 
         {
-            var doc = db.Doctors.Include(e => e.User).Include(e=>e.Schedulle).FirstOrDefault(e => e.Id == id);
+            var doc = db.Doctors.Include(e => e.User).Include(e=>e.Schedulle).FirstOrDefault(e => e.User.Id == id);
             return doc.Schedulle;
         }
         public void SaveSchedulle(SchedulleInstantiate[] req, int id) 
         {
-            var doc = db.Doctors.Include(e => e.User).Include(e=>e.Schedulle).FirstOrDefault(e => e.Id == id);
+            var doc = db.Doctors.Include(e => e.User).Include(e=>e.Schedulle).FirstOrDefault(e => e. User.Id == id);
             doc.Schedulle.SchedulleJson = req.ToJson();
             db.SaveChanges();
         }
