@@ -55,7 +55,7 @@ namespace WebKeyGenerator.Controllers
         [Route("AddOrUpdateUser")]
         public async Task<IActionResult> AddOrUpdateUser(User user)
         {
-            logger.Trace($"User id {UserID}");
+            //logger.Trace($"User id {UserID}");
 
             return SafeRun(_ =>
             {
