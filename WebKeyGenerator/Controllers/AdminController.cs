@@ -152,6 +152,16 @@ namespace WebKeyGenerator.Controllers
             });
         }
 
+        [HttpGet]
+        [Route("docsbyspec")]
+        public async Task<IActionResult> DocsBySpec(int id)
+        {
+            return SafeRun(_ =>
+            {
+                return new DataResponse<IEnumerable<Doctor>>() { IsOk=true, Data=dataService.DocsBySpec(id)};
+            });
+        }
+
 
         [HttpGet]
         [Route("download")]

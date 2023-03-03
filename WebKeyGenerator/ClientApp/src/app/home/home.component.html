@@ -1,7 +1,7 @@
 <div class="split left" style="margin-top:3%">
   <div class="centered">
     <div style="margin-top:5%;width:100%">
-      <button style="font-size: xx-large; padding: 50px; width: 100%" mat-raised-button color="primary">Онлайн-консультация</button>
+      <button (click)="route('list')" style="font-size: xx-large; padding: 50px; width: 100%" mat-raised-button color="primary">Онлайн-консультация</button>
     </div>
     <div style="margin-top:5%;width:100%">
       <button *ngIf="!isLogin" (click)="openEntry()" style="font-size: xx-large;padding:50px;width:100%" mat-raised-button color="primary">Стать частью команды</button>

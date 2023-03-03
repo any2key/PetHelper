@@ -1,0 +1,28 @@
+<mat-toolbar></mat-toolbar>
+<mat-card *ngIf="docs.length==0" style="margin-left:35%;margin-right:35%;text-align:center;margin-top:10%">
+  <mat-card-content style="text-align:center">
+    <h2>
+      УПС...
+    </h2>
+    <h4><b>Врачей данной специальности не найдено</b></h4>
+    Врачей требуемой специальности пока что не найдено. Они появятся позднее
+  </mat-card-content>
+</mat-card>
+
+<div *ngIf="docs.length>0">
+  <mat-card *ngFor="let d of docs" class="example-card">
+      <img style="width:55px;height:55px;border-radius:50%;float:left" src="data:image/png;base64,{{d.photo}}" />
+    <mat-card-header>
+      <mat-card-title>{{d.name}} {{d.lastname}}</mat-card-title>
+      <mat-card-subtitle>Стаж {{getStage(d.startWork)}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        {{d.about}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions style="position:absolute;bottom:25px;width:100%">
+      <button mat-button>Выбрать время</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

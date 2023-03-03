@@ -153,6 +153,23 @@ namespace WebKeyGenerator.Services
             db.SaveChanges();
         }
 
+        public IEnumerable<Doctor> DocsBySpec(int specId) 
+        {
+            var docs = db.Doctors.Include(e => e.Specialties).Include(e => e.Schedulle)
+                .Where(e => e.Specialties.Any(s => s.Id == specId)).Select(d=>new Doctor()
+                {
+                    Id = d.Id,
+                    About = d.About,
+                    Confirm= d.Confirm,
+                    Lastname=d.Lastname,
+                    Name=d.Name,
+                    Photo=d.Photo,
+                    StartWork=d.StartWork,
+                    Email=d.Email,
+                    Schedulle=d.Schedulle
+                });
+            return docs.ToArray();
+        }
 
 
         public void RemoveUser(int userId)

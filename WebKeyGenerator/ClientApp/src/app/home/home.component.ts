@@ -36,4 +36,8 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  route(path: string) {
+    this.router.navigate([path]);
+  }
+
 }

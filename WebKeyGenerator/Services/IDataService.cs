@@ -28,6 +28,8 @@ namespace WebKeyGenerator.Services
 
         void ActivateRequest(int id, IConfiguration config);
 
+        IEnumerable<Doctor> DocsBySpec(int specId);
+
         Stream GetFiles(int id);
 
         #endregion
