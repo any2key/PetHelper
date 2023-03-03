@@ -156,6 +156,7 @@ namespace WebKeyGenerator.Services
         public IEnumerable<Doctor> DocsBySpec(int specId) 
         {
             var docs = db.Doctors.Include(e => e.Specialties).Include(e => e.Schedulle)
+                .Where(e=>e.Confirm)
                 .Where(e => e.Specialties.Any(s => s.Id == specId)).Select(d=>new Doctor()
                 {
                     Id = d.Id,
